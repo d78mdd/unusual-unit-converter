@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>unusual unit converter</title>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
+
+   <body>
+      <div class="container">
+         <h1>unusual unit converter</h1>
+         
+          <form action="/units" method="post">
+            <input list="types" name="type">
+            <datalist id="types">
+              <option value="length">
+              <option value="mass">
+              <option value="time">
+              <option value="volume">
+            </datalist>
+            <input list="units" name="unit">
+            <datalist id="units">
+              <option value="length">
+              <option value="mass">
+              <option value="time">
+              <option value="volume">
+            </datalist>
+            <input id="uname" type="text" name="username" placeholder="amount">
+            <input type="submit" value="convert">
+          </form>
+          
+          <form action="/addUnits" method="post">
+            <input  name="addType">
+            <input  name="addUnit">
+            
+            <input type="submit" value="add">
+          </form>
+
+      </div>
+   </body>
+
+</html>

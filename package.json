@@ -2,14 +2,27 @@
   "name": "unusual-unit-converter",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server_1.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2"
+  },
+  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server_1.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/d78mdd/unusual-unit-converter.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+  "bugs": {
+    "url": "https://github.com/d78mdd/unusual-unit-converter/issues"
+  },
+  "homepage": "https://github.com/d78mdd/unusual-unit-converter#readme"
 }
