@@ -109,10 +109,8 @@ app.get('/addUnits', function(req, res) {
   console.log("path: /addUnits")
   console.log("req: " , req)
 
-  res.json({d:new Date})
+  //res.json({d:[1,2,3,4,5,6,7,8,9]})
 
-
-/*
   unitData.find({unitType: req.body.addType})
   .select('-__v')
   .exec(function(err, data) {
@@ -130,13 +128,54 @@ app.get('/addUnits', function(req, res) {
 
 
   });
-*/
-
 
     
 });
 
 
+
+app.get('/addTypesAtInit', function(req, res) {  // send all types from the DB to the page
+  console.log("method: " , req.method)
+  console.log("path: /addUnitsAtInit")
+  console.log("req: " , req)
+
+
+  unitData.find()
+  .select('-__v')
+  .exec(function(err, data) {
+    
+    res.json(data)
+    //console.log()
+
+  });
+   
+});
+
+
+
+app.post('/addUnits', function(req, res) {  // send all units according to the received type
+  console.log("method: " , req.method)
+  console.log("path: /addUnits")
+  console.log("req: " , req)
+
+  let s = req.body.type     // selected type
+  //console.log(s)
+
+
+  unitData.find({unitType: s})
+  .select('-__v')
+  .exec(function(err, data) {
+    
+  if (data.length>0) {   // there should be exactly one found result
+    if (data[0].units) {
+      res.json(data[0].units)     // send back to the front page the list of units of this type
+      console.log(data[0].units)
+    }
+  }
+
+  })
+   
+});
 
 
 

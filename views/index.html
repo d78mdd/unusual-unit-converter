@@ -2,10 +2,11 @@
 <html>
 
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <title>unusual unit converter</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <link href="style.css" rel="stylesheet" type="text/css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   </head>
 
@@ -14,19 +15,13 @@
       <h1>unusual unit converter</h1>
          
       <form action="/units" method="post">
-        <input list="types" name="type">
+        <input id="type" list="types" name="type">
         <datalist id="types">
-          <option value="length">
-          <option value="mass">
-          <option value="time">
-          <option value="volume">
+
         </datalist>
-        <input list="units" name="unit">
+        <input id="unit" list="units" name="unit">
         <datalist id="units">
-          <option value="length">
-          <option value="mass">
-          <option value="time">
-          <option value="volume">
+
         </datalist>
         <input id="uname" type="text" name="username" placeholder="amount">
         <input type="submit" value="convert">
@@ -40,14 +35,60 @@
 
     </div>
 
+
+
     <script>
-      let x = document.getElementById("types")
-      console.log(x,x,x,x,x,x)
+
+
+      $(document).ready(function(){  //as soon as the page loads
+
+
+        $.get("/addTypesAtInit", function (data, status){  // request types from the server
+
+          for(let i=0; i<data.length; i++){
+            //console.log( data[i] )
+            let item = data[i].unitType
+            $("#types").append('<option value="'+item+'">');  // and add them as options in the list box thingy
+          }
+
+          
+         })
+      })
+
+
+
+      $("#type").change(function(){  //as soon as user chooses a new type
+
+        let t = $("#type").val()
+
+        $("#units").empty();   // empty the current list of units
+
+        $.post("/addUnits", {type:t}, function (data, status){  // request units from the server          
+
+          for(let i=0; i<data.length; i++){  // add the newly received ones
+            //console.log( data[i] )
+            
+            let item = data[i].description
+            $("#units").append('<option value="'+item+'">');  // and add them as options in the list box thingy
+          }
+          
+          console.log(data)
+          
+          
+        })
+      
+      })
+
+
       
       $("#add").click(function(){
          $.get("/addUnits", function (data, status){
-          $("#add").innerHTML = data
-          console.log( data)
+
+          for(let i=0; i<data.length; i++){
+            console.log( data[i] )
+            $("#types").append('<option value="'+data[i]+'">');
+          }
+          
          })
       })
 
@@ -55,6 +96,7 @@
 
 
     </script>
+
 
   </body>
 
