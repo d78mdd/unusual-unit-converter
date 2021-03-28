@@ -1,43 +1,61 @@
 <!DOCTYPE html>
 <html>
 
-   <head>
-      <title>unusual unit converter</title>
-      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
-      <link href="style.css" rel="stylesheet" type="text/css">
-   </head>
+  <head>
+    <title>unusual unit converter</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <link href="style.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-   <body>
-      <div class="container">
-         <h1>unusual unit converter</h1>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>unusual unit converter</h1>
          
-          <form action="/units" method="post">
-            <input list="types" name="type">
-            <datalist id="types">
-              <option value="length">
-              <option value="mass">
-              <option value="time">
-              <option value="volume">
-            </datalist>
-            <input list="units" name="unit">
-            <datalist id="units">
-              <option value="length">
-              <option value="mass">
-              <option value="time">
-              <option value="volume">
-            </datalist>
-            <input id="uname" type="text" name="username" placeholder="amount">
-            <input type="submit" value="convert">
-          </form>
-          
-          <form action="/addUnits" method="post">
-            <input  name="addType">
-            <input  name="addUnit">
-            
-            <input type="submit" value="add">
-          </form>
+      <form action="/units" method="post">
+        <input list="types" name="type">
+        <datalist id="types">
+          <option value="length">
+          <option value="mass">
+          <option value="time">
+          <option value="volume">
+        </datalist>
+        <input list="units" name="unit">
+        <datalist id="units">
+          <option value="length">
+          <option value="mass">
+          <option value="time">
+          <option value="volume">
+        </datalist>
+        <input id="uname" type="text" name="username" placeholder="amount">
+        <input type="submit" value="convert">
+      </form>
+      
+        <input  name="addType">
+        <input  name="addUnit">
 
-      </div>
-   </body>
+        <input id="magnitude" type="text" name="magnitude" placeholder="magnitude">
+        <input id="add" type="submit" value="add">
+
+    </div>
+
+    <script>
+      let x = document.getElementById("types")
+      console.log(x,x,x,x,x,x)
+      
+      $("#add").click(function(){
+         $.get("/addUnits", function (data, status){
+          $("#add").innerHTML = data
+          console.log( data)
+         })
+      })
+
+      
+
+
+    </script>
+
+  </body>
 
 </html>

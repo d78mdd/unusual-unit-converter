@@ -104,11 +104,15 @@ app.post('/units', function(req, res) {
 
 
 
-app.post('/addUnits', function(req, res) {
+app.get('/addUnits', function(req, res) {
   console.log("method: " , req.method)
   console.log("path: /addUnits")
-  console.log("req.body: " , req.body)
+  console.log("req: " , req)
 
+  res.json({d:new Date})
+
+
+/*
   unitData.find({unitType: req.body.addType})
   .select('-__v')
   .exec(function(err, data) {
@@ -116,16 +120,17 @@ app.post('/addUnits', function(req, res) {
     res.json(data.length)
     //console.log()
 
-    if ( data.length > 0 ) {  // if there is a unit with this type (should be just one)
+    if ( data.length == 0 ) {  // if there is not such a unit type
+      // then add it to the database
+      const datum1 = new unitData({
+        unitType: req.body.addType
+      })
+      datum1.save()
     }
 
-    const datum1 = new unitData({
-      unitType: req.body.addType
-    })
-    datum1.save()
 
   });
-
+*/
 
 
     
